@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .c1 {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-md-6 col-md-offset-3">
+            <a href="/track/sightings/add" class="btn btn-success" style="margin-right: 75px">Add</a>
+            <h2 class="text-center c1">All Squirrel Sightings</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th>longitude</th>
+                        <th>latitude</th>
+                        <th>unique squirrel id</th>
+                        <th>shift</th>
+                        <th>date</th>
+                        <th>age</th>
+                        <th>primary fur color</th>
+                        <th>location</th>
+                        <th>specific location</th>
+                        <th>running</th>
+                        <th>chasing</th>
+                        <th>climbing</th>
+                        <th>eating</th>
+                        <th>foraging</th>
+                        <th>other activities</th>
+                        <th>kuks</th>
+                        <th>quaas</th>
+                        <th>moans</th>
+                        <th>tail flags</th>
+                        <th>tail twitches</th>
+                        <th>approaches</th>
+                        <th>indifferent</th>
+                        <th>runs from</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for squirrel_obj in sighting_list %}
+                        <tr class="text-center">
+			    <td>{{squirrel_obj.longitude}}</td>
+			    <td>{{squirrel_obj.latitude}}</td>
+			    <td>{{squirrel_obj.unique_squirrel_id}}</td>
+			    <td>{{squirrel_obj.shift}}</td>
+			    <td>{{squirrel_obj.date}}</td>
+			    <td>{{squirrel_obj.age}}</td>
+			    <td>{{squirrel_obj.primary_fur_color}}</td>
+			    <td>{{squirrel_obj.location}}</td>
+			    <td>{{squirrel_obj.specific_location}}</td>
+			    <td>{{squirrel_obj.running}}</td>
+			    <td>{{squirrel_obj.chasing}}</td>
+			    <td>{{squirrel_obj.climbing}}</td>
+			    <td>{{squirrel_obj.eating}}</td>
+			    <td>{{squirrel_obj.foraging}}</td>
+			    <td>{{squirrel_obj.other_activities}}</td>
+			    <td>{{squirrel_obj.kuks}}</td>
+			    <td>{{squirrel_obj.quaas}}</td>
+			    <td>{{squirrel_obj.moans}}</td>
+			    <td>{{squirrel_obj.tail_flags}}</td>
+			    <td>{{squirrel_obj.tail_twitches}}</td>
+			    <td>{{squirrel_obj.approaches}}</td>
+			    <td>{{squirrel_obj.indifferent}}</td>
+			    <td>{{squirrel_obj.runs_from}}</td>
+			    <td><a href="/track/sightings/{{squirrel_obj.unique_squirrel_id}}" class="btn btn-primary">Edit</a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
