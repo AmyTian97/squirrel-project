@@ -22,7 +22,19 @@ def add_sightings(request):
         form = SightingForm()
     return render(request,'track/add.html',{'form':form})
 
+
 def sighting_detail(request,unique_squirrel_id):
     sighting = get_object_or_404(Squirrels, unique_squirrel_id=unique_squirrel_id)
     return render(request, 'track/detail.html', {'sighting':sighting})
 
+def update_sightings(request,unique_squirrel_id):
+    sighting = get_object_or_404(Squirrels, unique_squirrel_id=unique_squirrel_id)
+    if request.method == 'POST':
+        form = SightingForm(request.POST,instance=sighting)
+        if form.is_valid():
+            sighting = form.save()
+            sighting.save()
+            return redirect('sighting-detail',unique_squirrel_id=unique_squirrel_id)
+    else:
+        form = SightingForm(instance=sighting)
+    return render(request,'track/update.html',{'form':form})
