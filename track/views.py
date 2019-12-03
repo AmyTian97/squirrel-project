@@ -11,6 +11,18 @@ def home(request):
     return render(request, 'track/home.html', locals())
 
 
+def add_sightings(request):
+    if request.method == 'POST':
+        form = SightingForm(request.POST)
+        if form.is_valid():
+            Squirrels.objects.create(**form.cleaned_data)
+            return redirect('/track/sightings/')
+        return HttpResponse(form.errors)
+    else:
+        form = SightingForm()
+    return render(request,'track/add.html',{'form':form})
+
 def sighting_detail(request,unique_squirrel_id):
     sighting = get_object_or_404(Squirrels, unique_squirrel_id=unique_squirrel_id)
     return render(request, 'track/detail.html', {'sighting':sighting})
+
