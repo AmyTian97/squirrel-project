@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+from django.db.models import  Sum,Max,Min,Avg,Count
 from .models import Squirrels
 from .forms import SightingForm
 
@@ -47,3 +48,11 @@ def update_sightings(request,unique_squirrel_id):
 def delete_sightings(request,unique_squirrel_id):
     Squirrels.objects.filter(unique_squirrel_id=unique_squirrel_id).delete()
     return HttpResponse(f'You have successfully deleted sighting {unique_squirrel_id}!')
+
+def stat(request):
+    age=Squirrels.objects.values('age').annotate(count=Count('unique_squirrel_id'))
+    color=Squirrels.objects.values('primary_fur_color').annotate(count=Count('unique_squirrel_id'))
+    location=Squirrels.objects.values('location').annotate(count=Count('unique_squirrel_id'))
+    eating=Squirrels.objects.filter(eating=True).values('primary_fur_color').annotate(count=Count('eating'))
+    other=Squirrels.objects.values('other_activities').annotate(count=Count('unique_squirrel_id'))
+    return render(request,'track/stat.html',locals())
