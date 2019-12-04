@@ -30,6 +30,7 @@ def sighting_detail(request,unique_squirrel_id):
     sighting = get_object_or_404(Squirrels, unique_squirrel_id=unique_squirrel_id)
     return render(request, 'track/detail.html', {'sighting':sighting})
 
+
 def update_sightings(request,unique_squirrel_id):
     sighting = get_object_or_404(Squirrels, unique_squirrel_id=unique_squirrel_id)
     if request.method == 'POST':
@@ -37,7 +38,12 @@ def update_sightings(request,unique_squirrel_id):
         if form.is_valid():
             sighting = form.save()
             sighting.save()
-            return redirect('sighting-detail',unique_squirrel_id=unique_squirrel_id)
+            return redirect('sighting_detail',unique_squirrel_id=sighting.unique_squirrel_id)
     else:
         form = SightingForm(instance=sighting)
     return render(request,'track/update.html',{'form':form})
+
+
+def delete_sightings(request,unique_squirrel_id):
+    Squirrels.objects.filter(unique_squirrel_id=unique_squirrel_id).delete()
+    return HttpResponse(f'You have successfully deleted sighting {unique_squirrel_id}!')
