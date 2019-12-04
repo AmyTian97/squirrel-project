@@ -4,6 +4,9 @@ from .models import Squirrels
 from .forms import SightingForm
 
 
+def map(request):
+    sightings = Squirrels.objects.all()
+    return render(request,'track/map.html',locals())
 
 
 def home(request):
