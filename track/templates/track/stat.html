@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stats</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .c1 {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row" style="margin-top: 50px">
+        <div class="col-md-6 col-md-offset-3">
+            <h2 class="text-center c1">Squirrel Sightings Stats</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h3 class="text-center c1">1 Age Distribution</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">item</th>
+                        <th class="text-center">count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for squirrel_obj in age %}
+                        <tr class="text-center">
+                            <td>{{squirrel_obj.age}}</td>
+                            <td>{{squirrel_obj.count}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+           	<li>blank: No Age Record</li>
+		<li>"?": Not Sure</li>
+	    	<li>AD: Adult</li>
+		<li>JU: Junior</li>
+            <h3 class="text-center c1">2 Color Distribution</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">item</th>
+                        <th class="text-center">count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for squirrel_obj in color %}
+                        <tr class="text-center">
+                            <td>{{squirrel_obj.primary_fur_color}}</td>
+                            <td>{{squirrel_obj.count}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+                <li>blank: No Color Record</li>
+                <li>BL: Black</li>
+                <li>CI: Cinnamon</li>
+		<li>GR: Gray</li>
+            <h3 class="text-center c1">3 Where are the squirrels?</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">item</th>
+                        <th class="text-center">count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for squirrel_obj in location %}
+                        <tr class="text-center">
+                            <td>{{squirrel_obj.location}}</td>
+                            <td>{{squirrel_obj.count}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            	<li>blank: No Location Record</li>
+                <li>AG: Above Ground </li>
+                <li>GP: Ground Plane</li>
+            <h3 class="text-center c1">4 How many squirrels are eating?</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">item</th>
+                        <th class="text-center">count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for squirrel_obj in eating %}
+                        <tr class="text-center">
+                            <td>{{squirrel_obj.primary_fur_color}}</td>
+                            <td>{{squirrel_obj.count}}</td>
+			</tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+           	<li>blank: No Color Record</li>
+                <li>BL: Black</li>
+                <li>CI: Cinnamon</li>
+                <li>GR: Gray</li>
+            <h3 class="text-center c1">5 What are the other activities?</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">item</th>
+                        <th class="text-center">count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for squirrel_obj in other %}
+                        <tr class="text-center">
+                            <td>{{squirrel_obj.other_activities}}</td>
+                            <td>{{squirrel_obj.count}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+</div>
+</body>
+</html>
