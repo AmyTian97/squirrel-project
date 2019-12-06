@@ -17,6 +17,7 @@
     <div class="row" style="margin-top: 50px">
         <div class="col-md-6 col-md-offset-3">
             <h2 class="text-center c1">Squirrel Sightings Stats</h2>
+	    <li>Note: In order to save memory and follow the convention, we use abbreviation for the database.</li>
         </div>
     </div>
     <div class="row">
@@ -83,7 +84,7 @@
             	<li>blank: No Location Record</li>
                 <li>AG: Above Ground </li>
                 <li>GP: Ground Plane</li>
-            <h3 class="text-center c1">4 How many squirrels are eating?</h3>
+	    <h3 class="text-center c1">4 How many squirrels are eating?</h3>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr class="text-center">
@@ -96,15 +97,42 @@
                         <tr class="text-center">
                             <td>{{squirrel_obj.primary_fur_color}}</td>
                             <td>{{squirrel_obj.count}}</td>
-			</tr>
+                        </tr>
                     {% endfor %}
                 </tbody>
             </table>
-           	<li>blank: No Color Record</li>
+                <li>blank: No Color Record</li>
                 <li>BL: Black</li>
                 <li>CI: Cinnamon</li>
                 <li>GR: Gray</li>
-            <h3 class="text-center c1">5 What are the other activities?</h3>
+            <h3 class="text-center c1">5 Tail Flags & Tail Twitches</h3>
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr class="text-center">
+                        <th class="text-center">actions</th>
+			<th class="text-center">count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td>Both flag and twitch</td>
+			<td>{{flag_twitch.count}}</td>
+		    </tr>
+		    <tr class="text-center">
+                        <td>Flag but not twitch</td>
+                        <td>{{flag_notwitch.count}}</td>
+                    </tr>
+		    <tr class="text-center">
+                        <td>Twitch but not flag</td>
+                        <td>{{noflag_twitch.count}}</td>
+                    </tr>
+		    <tr class="text-center">
+                        <td>Neither flag nor twitch</td>
+                        <td>{{noflag_notwitch.count}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <h3 class="text-center c1">6 What are the other activities?</h3>
             <table class="table table-bordered table-striped table-hover">
                 <thead>
                     <tr class="text-center">
