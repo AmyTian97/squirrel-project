@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.db.models import  Sum,Max,Min,Avg,Count
+from django.db.models import Count,Q
 from .models import Squirrels
 from .forms import SightingForm
 
@@ -53,6 +53,10 @@ def stat(request):
     age=Squirrels.objects.values('age').annotate(count=Count('unique_squirrel_id'))
     color=Squirrels.objects.values('primary_fur_color').annotate(count=Count('unique_squirrel_id'))
     location=Squirrels.objects.values('location').annotate(count=Count('unique_squirrel_id'))
+    flag_twitch=Squirrels.objects.filter(Q(tail_flags=True) & Q(tail_twitches=True)).aggregate(count=Count('unique_squirrel_id'))
+    flag_notwitch=Squirrels.objects.filter(Q(tail_flags=True) & Q(tail_twitches=False)).aggregate(count=Count('unique_squirrel_id'))
+    noflag_twitch=Squirrels.objects.filter(Q(tail_flags=False) & Q(tail_twitches=True)).aggregate(count=Count('unique_squirrel_id'))
+    noflag_notwitch=Squirrels.objects.filter(Q(tail_flags=False) & Q(tail_twitches=False)).aggregate(count=Count('unique_squirrel_id'))
     eating=Squirrels.objects.filter(eating=True).values('primary_fur_color').annotate(count=Count('eating'))
     other=Squirrels.objects.values('other_activities').annotate(count=Count('unique_squirrel_id'))
     return render(request,'track/stat.html',locals())
