@@ -3,6 +3,9 @@ from django.utils.translation import gettext as _
 
 # Create your models here.
 class Squirrels(models.Model):
+    """
+    Create a data model including following fields
+    """
     longitude = models.FloatField()
     latitude = models.FloatField()
     unique_squirrel_id = models.CharField(
