@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from django.db.models import Count,Q
+from django.db.models import Count, Q
 from .models import Squirrels
 from .forms import SightingForm
 
@@ -10,7 +10,7 @@ def map(request):
     Return a map that displays the location of the squirrel sightings
     """
     sightings = Squirrels.objects.all()
-    return render(request,'track/map.html',locals())
+    return render(request, 'track/map.html', locals())
 
 
 def home(request):
@@ -35,10 +35,10 @@ def add_sightings(request):
         return HttpResponse(form.errors)
     else:
         form = SightingForm()
-    return render(request,'track/add.html',{'form':form})
+    return render(request, 'track/add.html', {'form':form})
 
 
-def sighting_detail(request,unique_squirrel_id):
+def sighting_detail(request, unique_squirrel_id):
     """
     Return a page showing details for a particular sighting
     with a link to update the sighting,
@@ -49,7 +49,7 @@ def sighting_detail(request,unique_squirrel_id):
     return render(request, 'track/detail.html', {'sighting':sighting})
 
 
-def update_sightings(request,unique_squirrel_id):
+def update_sightings(request, unique_squirrel_id):
     """
     Return a page to update a particular sighting
     """
@@ -59,13 +59,13 @@ def update_sightings(request,unique_squirrel_id):
         if form.is_valid():
             sighting = form.save()
             sighting.save()
-            return redirect('sighting_detail',unique_squirrel_id=sighting.unique_squirrel_id)
+            return redirect('sighting_detail', unique_squirrel_id=sighting.unique_squirrel_id)
     else:
         form = SightingForm(instance=sighting)
-    return render(request,'track/update.html',{'form':form})
+    return render(request, 'track/update.html', {'form':form})
 
 
-def delete_sightings(request,unique_squirrel_id):
+def delete_sightings(request, unique_squirrel_id):
     """
     Delete a particular sighting from the database,
     and return a message for successfully deleting it
@@ -77,13 +77,13 @@ def stat(request):
     """
     Return a page showing several general stats of the Squirrel data
     """
-    age=Squirrels.objects.values('age').annotate(count=Count('unique_squirrel_id'))
-    color=Squirrels.objects.values('primary_fur_color').annotate(count=Count('unique_squirrel_id'))
-    location=Squirrels.objects.values('location').annotate(count=Count('unique_squirrel_id'))
-    flag_twitch=Squirrels.objects.filter(Q(tail_flags=True) & Q(tail_twitches=True)).aggregate(count=Count('unique_squirrel_id'))
-    flag_notwitch=Squirrels.objects.filter(Q(tail_flags=True) & Q(tail_twitches=False)).aggregate(count=Count('unique_squirrel_id'))
-    noflag_twitch=Squirrels.objects.filter(Q(tail_flags=False) & Q(tail_twitches=True)).aggregate(count=Count('unique_squirrel_id'))
-    noflag_notwitch=Squirrels.objects.filter(Q(tail_flags=False) & Q(tail_twitches=False)).aggregate(count=Count('unique_squirrel_id'))
-    eating=Squirrels.objects.filter(eating=True).values('primary_fur_color').annotate(count=Count('eating'))
-    other=Squirrels.objects.values('other_activities').annotate(count=Count('unique_squirrel_id'))
-    return render(request,'track/stat.html',locals())
+    age = Squirrels.objects.values('age').annotate(count=Count('unique_squirrel_id'))
+    color = Squirrels.objects.values('primary_fur_color').annotate(count=Count('unique_squirrel_id'))
+    location = Squirrels.objects.values('location').annotate(count=Count('unique_squirrel_id'))
+    flag_twitch = Squirrels.objects.filter(Q(tail_flags=True) & Q(tail_twitches=True)).aggregate(count=Count('unique_squirrel_id'))
+    flag_notwitch = Squirrels.objects.filter(Q(tail_flags=True) & Q(tail_twitches=False)).aggregate(count=Count('unique_squirrel_id'))
+    noflag_twitch = Squirrels.objects.filter(Q(tail_flags=False) & Q(tail_twitches=True)).aggregate(count=Count('unique_squirrel_id'))
+    noflag_notwitch = Squirrels.objects.filter(Q(tail_flags=False) & Q(tail_twitches=False)).aggregate(count=Count('unique_squirrel_id'))
+    eating = Squirrels.objects.filter(eating=True).values('primary_fur_color').annotate(count=Count('eating'))
+    other = Squirrels.objects.values('other_activities').annotate(count=Count('unique_squirrel_id'))
+    return render(request, 'track/stat.html', locals())
