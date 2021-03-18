@@ -1,5 +1,5 @@
 asgiref==3.2.3
-Django==3.0
+Django==3.1.6
 -e git+https://github.com/makinacorpus/django-leaflet.git@99cbf3c1a0f32743df3e6f4a1ea9b31079c02124#egg=django_leaflet
 leaflet==0.0.3
 pytz==2019.3
